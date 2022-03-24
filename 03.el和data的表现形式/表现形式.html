@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+        <input type="text" v-model="name"/>
+    </div>
+    <script type="text/javascript" >
+        Vue.config.productionTip = false//阻止：Vue在启动的时候生成生产提示
+        const v=new Vue({
+            // el:'#root',
+            /* 这是一个对象形式
+            data:{
+                name:'张三'
+            } */
+
+
+            /* 1.data的第二种写法函数式的方式
+                 下面的具体调用过程，是Vue在底层做好了工作 */
+            data(){
+                /* 01.注意：第二种方式，需要在下面去放回一个值，上面省略了function */
+                return{
+                    name:'张三你是非常好的人'
+                } 
+            }
+        })
+        /* 2.el的第二种方式 */
+        v.$mount('#root')
+        
+
+    </script>
+</body>
+</html>

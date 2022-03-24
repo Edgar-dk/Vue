@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <!-- 1.什么事计算属性，那就是把一个姓和名拼接在一起的使用方式
+           需要明白一点的是什么事属性，属性就是在data中规定好的，然后计算属性
+           就是把属性的拼接成一个全新的属性，别名就是计算属性，哪既然是计算属性
+           这个位置的话，就不可以在属性的位置上写了，需要开辟一个全新的对象，就是计算属性 -->
+    <div id="root">
+        <!-- 2.V-model就是开启双向管道，页面上的数据发生改变的话
+               随之Vue模板中的数据也是发生改变的 -->
+      姓：<input type="text" v-model="firstname"><br>
+      名：<input type="text" v-model="lastname"><br>
+      <!-- 3.span是拼接数据，可以把这个数据拼接下这一行的后面，分析下面的执行过程
+             在标签体中，获取这个数据，去VUE实例中找，这个名字不是自己取的，是官方定义好的
+             所以，直接到computed中找然后在获取，下面有很多个，哪执行的话，还是依次的从下
+             面去获取吗，不是的，在第一次获取的时候，执行完执行，把这个数据放在缓存中，到了第二个
+             的话，直接从缓存中拿来，当数据发生改变的话，需要从新调用一次 -->
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+      姓名：<span>{{fullName}}</span><br>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm=new Vue({
+            el:'#root',
+            data:{
+                firstname:'张',
+                lastname:'三'
+            },
+            computed:{
+                /* 4.里面的属性是拼接成的，所以还需要一个拼接的函数,既然是拼接成的
+                     就需要获取这基本的属性，然后在拼接在一起，获取的话，就需要get的方式
+                     其中的this是当前的这个Vue实例，可以根据这个this来指定想要的属性
+                     因为this是站在Vue的这个高点上，是可以直接获取里面的数据的（按照个人的理解）
+                     然后下面的返回值去了哪里，哪就是调用这个函数的地方了，不去哪里还能去哪里 */
+                fullName:{
+                    get(){
+                        return this.firstname + '-' +this.lastname 
+                    },
+                    set(value){
+                        /* 5.下面的是把打印在控制塔上的汉字数据用-来分割开
+                             获取数据的时候，第一个用arr[0]的方式，第二个是arr[1]的方式 */
+                        const arr= value.split('-')
+                        this.firstname = arr[0]
+                        this.lastname = arr[1]
+                    }
+                }
+            }
+            
+        })
+    </script>
+</body>
+
+</html>

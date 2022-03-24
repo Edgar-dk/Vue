@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你好Vue</title>
+    <!-- 1.引入Vue的开发包 -->
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <!-- 1.先准备好一个容器，把Vue的代码写在容器里面 -->
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+    </div>
+    
+    <script type="text/javascript" >
+        Vue.config.productionTip = false//阻止：Vue在启动的时候生成生产提示
+        /*1.创建Vue实例，然后用一个x来接收，至于前面的是什么，
+            在Java中可以是一个int 但是下面，接收的是创建好Vue这个函数，在内存分配空间的名字
+        */        
+        const x=new Vue({
+            // 01.按照原先的规则是获取这个id，然后在把这个Vue实例写在这个容器中，现在直接获取，并且写入
+            // 并且两者之间获取了联系，其实前面的x可以不接，会自动的放到内存中
+            el:'#root',
+            data:{
+                name:'这个是Sias'
+            }
+        })
+    </script>
+</body>
+</html>

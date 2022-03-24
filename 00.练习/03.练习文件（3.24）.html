@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        你好{{name}}<br>
+        <a :href="url" @click.prevent="showInfo">点击{{name}}百度</a>
+    </div>
+    <script type="text/javascript">
+        /* 1.在创建的Vue实例中，应该做好每一步，
+             下面第一个先获取这个地址，然后根据这个地址，在操作里面的数据
+             所谓的操作就是，增加数据，和修改数据然后，在容器中，按照一定
+             的方法去获取数据即可，第三个是，方法，就是逻辑上的操作你干什么 */
+        new Vue({
+            el:'#root',
+            data:{
+                name:'张三',
+                url:'http://www.baidu.com'
+            },
+            methods:{
+                showInfo(e){
+                    alert(e.target.innerText)
+                    alert('你好')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

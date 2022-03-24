@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>你好{{name}}</h1>
+        <!-- 1.当前的点击v-on是点击事件，最后在回到Vue这个实例中
+               简写形式是@ -->
+        <button v-on:click="showInfo1">点我试一试（不传递参数）</button>
+        <button @click="showInfo2($event,66)">点我试一试（传递参数）</button>
+    </div>
+    <script type="text/javascript" >
+        new Vue({
+            el:'#root',
+            data:{
+                name:'同学'
+            },
+            methods:{
+                /* 2.参数中的event，获取的是当前这个便签，然后可以获取标签里面的内容
+                     第一个target获取这个标签，含标签里面的内容
+                    第二个获取标签里面的内容（先获取这个便签，在获取这个便签里面的内容，就是先有上一步，在有下一步） */
+                showInfo1(event){
+                    
+                    console.log(event.target.innerText)
+                    // alert('欢迎你进来了')
+                },
+                /* 3.参数为什么有两个，第一个获取的是当前标签，
+                     第二个是传递过来的数据，为了防止在传递数据的时候
+                     把event占具，所以在最上面的形式是$event,后面在写数据*/
+                showInfo2(event,number){
+                    console.log(number)
+                    console.log(event.target.innerText)
+                    // alert('欢迎你进来了')
+                }
+            }
+        })
+     </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <!-- 下面是一个模型 -->
+        <h1>{{name}}</h1><br>
+        你好：<input type="text" v-model="name"><br>
+        这是一个地址：<a :href="url">百度的地址</a>
+    </div>
+    <script type="text/javascript" >
+        Vue.config.productionTip = false//阻止：Vue在启动的时候生成生产提示
+        // Vue里面是数据，下面的数据通过Vue这个引擎到模板，最后在渲染到页面上
+        new Vue({
+            el:'#root',
+            
+            data:{
+                /* 1.需要注意一点的是data是标签里面的数据 */
+                name:'Sias',
+                url:'http://www.baidu.com',
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <script type="text/javascript" >
+       let person={
+           name:'张三',
+           sxe:'男',
+        //    age:18
+       }
+        // 1.调用一个方法为，一个对象里面的age传递一个具体的值,只是这种方式不可以遍历 */
+        Object.defineProperty(person,'age',{
+           value:19,
+           enumerable:true,//控制属性是否可以遍历
+        })
+
+        /* 2.输出的形式是一个数组
+            将person里面的数据显示在浏览器页面上
+            不可以把外面的数据显示出来，只能显示里面的
+            Object.key是遍历的意思，就是遍历person里面的数据
+            是把person里面的属性以数组的形式遍历出来
+            只可以遍历里面写好的数据， */
+            console.log(Object.keys(person))
+        
+       /* 2.可以遍历从外界传入的数据，这种输出的方式，数据是一个对象的形式 */
+            console.log(person)
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据代理</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <script type="text/javascript" >
+        /* 数据代理：一个对象对另外一个对象属性的操作（读、写） */
+       let Obj={x:100}
+       let Obj1={y:200}
+       Object.defineProperty(Obj1,'x',{
+           get(){
+               return Obj.x
+           },
+           /* 1.set后面的value是，Obj1执行get方法得到Obj，在后面写数据，这个数据就是value，就是
+                执行到了set这个方法，随之，把这个数据传递给下面，所以Obj.x发生了改变 */
+           set(value){
+               Obj.x=value
+           }
+       })
+     </script>
+</body>
+</html>
