@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+       
+        <h2>今天天气凉爽{{info}}</h2>
+        <button @click="Change">切换今天的天气</button>
+        <!-- 1.注意，a的值，是在number里面的所以取出来的
+               时候也应该对象点值， -->
+        <h1>a的值是{{number.a}}</h1>
+        <!-- 2.可以使用简单的方式来操作 -->
+        <button @click="number.a++">a的值发生变化</button>
+
+        <h1>b的值是{{number.b}}</h1>
+        <!-- 2.可以使用简单的方式来操作 -->
+        <button @click="number.b++">a的值发生变化</button>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#root',
+        data: {
+            /* 1.true的话表示当前的天气是炎热的，false的话表示是凉爽的 */
+            isHot: true,
+            number:{
+                a:1,
+                b:2,
+            }
+        },
+        methods: {
+            Change(){
+                /* 2.当点击了这个按钮，当前的Vue实例去改变这个值
+                   那么怎么去改变这个值呢，首先先去获取到这个值，
+                   然后取反的形式去改变，一旦改变，Vue的模型中的数据就随之发生改变
+                   这个改变是全局的变，不单单是这个地方的数据改变了
+                   其他的地方的数据不变，不是的，一旦改变，全局变，】全局变
+                   从而每一个地方变，说白了还是this的作用
+                   注意：需要明白一个的是如果说下面的数据改变，上面不用的话，也会自动的
+                   改变数据，只是这个改变不会显示在页面上 */
+                this.isHot=!this.isHot
+            }
+        },
+        computed:{
+
+            info(){
+                /*0.下面的表现形式，问好后面是true的意思，不是true的话，执行后面的凉爽
+                    默认的情况下执行的是true，其实也是可以改变的，根据上面取饭反的形式
+                    去改变*/
+               return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        watch:{
+            isHot:{
+                /* 3.在这个时候可能会有一个问题：为什么有的地方带上
+                     了冒号，有的地方没有冒号呢，反而是一个括号，其中
+                     带有冒号的是一个对象，在对象里面可以写和数据有关的
+                     东西，然而在函数里面写的却是具体的逻辑算法，就是操作
+                     这个数据的形式的，括号是可以传递数据的，
+                     写的地方是，在对象里面，因为对象里面是
+                     和数据有关的地方，newValue是新数据，oldValue是旧数据
+                     数据的形式是布尔类型，false和true
+                     
+                     注意：下面的功能最重要的一步是handler这个函数,监视的数据是在data的数据层*/
+                handler(newValue,oldValue){
+                    immediate:true,
+                    /* 4.参数中传递的是ishot数据的boolea值 */
+                    console.log('数据发生改变',newValue,oldValue)
+                }
+            },
+            number:{
+                /* 5.其中最重要的一步是handler这个函数，
+                     因为有了这个函数，一旦a的值发生了变化
+                     随之而来的就会执行下面的函数,deep的含义是当number里面的
+                     数据发生改变的时候，就会执行handler这个函数,一开始的时候
+                     没有开启，怎么点击都不会发生变化 */
+                deep:true,
+                handler(){
+                    console.log('数据发生的变化')
+                }
+            }
+        }
+    })
+</script>
+
+</html>

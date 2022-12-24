@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 1.opacity是简写的形式，
+               一开始第一个是透明度的意思，第二个
+               是从Vue中找出这个名字，然后根据这个变量
+               后面的数字变化透明度，因为二者一样，可以写成
+               对象的形式， -->
+        <h2 :style="{opacity}">透明度</h2>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                opacity: 1,
+            },
+
+            /* 2.Vue完成模板的解析。并且把初始的正式Dom元素放入页面，然后在去调用这个函数
+                 -= 0.01意思是从1中减去0.01后，然后在等于opacity */
+            mounted() {
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) this.opacity = 1
+                },16)
+            },
+        })
+    </script>
+</body>
+
+</html>

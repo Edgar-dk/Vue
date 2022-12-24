@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>key的原理</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+      <form @submit.prevent="Demo">
+        <!-- 1.当选择的是password的时候
+               输入进去的数据是隐藏的
+               名字和value可以动态的更改
+               数据的，之后在后台获取数据的时候
+               根据名字去获取value的值
+            
+               当去选择多个的时候，使用数组去接收数据
+               数据是一个的时候，使用字符串接收,想要是页面上值显示一个
+               的话，直接在Vue中区设置好（变量是自己定义的，直接在变量的
+               后面写上值即可）,number在年龄的地方，第一个，表示输入的数据只能
+               是数字，第二个number是当收集数据的时候，也是按照int类型去接收的,
+               其他信息地方v-model.lazy，表示鼠标失去焦点的时候，才会收集里面的数据\
+               trim去掉前后的空格
+            
+               注意：当 一个数组数据的时候，没有去定义数组去接受，并且，后面没写value
+                    当去接受一个数据时，显示的是false或者是true，例如：type="checkbox"
+                    后面没写value，显示是布尔类型，因为没有办法接收到数据，-->
+          <label for="demo">账号：</label>
+          <input type="text" id="demo" v-model="account"><br><br>
+          密码：<input type="password"v-model="password" ><br><br>
+          性别：
+          男<input type="radio" name="sex1" v-model.trim="sex1" value="male">
+          女<input type="radio" name="sex1" v-model="sex1" value="female"><br><br>
+          年龄:<input type="number" v-model.number="age"><br><br> 
+          爱好：
+          学习<input type="checkbox" v-model="habby" value="study">
+          打游戏<input type="checkbox" v-model="habby" value="gamne">
+          篮球<input type="checkbox" v-model="habby" value="playbook">
+          足球<input type="checkbox" v-model="habby" value="zuuk"><br><br>
+          所属校区：
+          <select v-model="city">
+              <option value="">选择</option>
+              <option value="shanghai">上海</option>
+              <option value="beijing">北京</option>
+              <option value="nanjing">南京</option>
+          </select><br><br>
+          其他信息:
+          <textarea v-model.lazy="other"></textarea><br><br>
+          <input type="checkbox" v-model="aggre">阅读并接受<a href="www.baidu.com">用户协议</a><br><br>
+          <button>提交</button>
+      </form>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                account:'',
+                password:'',
+                sex1:'',
+                age:'',
+                habby:[],
+                city:'',
+                other:'',
+                aggre:'',
+            },
+            methods: {
+                Demo(){
+                    alert(1)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

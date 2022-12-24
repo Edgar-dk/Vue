@@ -1,0 +1,16 @@
+{
+    "background.customImages": [
+    
+    ],
+    "background.style": {
+        "content": "''",
+        "pointer-events": "none",
+        "position": "absolute",
+        "z-index": "99999",
+        "width": "100%",
+        "height": "100%",
+        "background-position": "200% 100%",
+        "background-repeat": "no-repeat",
+        "opacity": 1.2
+    }
+}

@@ -42,24 +42,15 @@
             },
             
             computed:{
-                /* 4.里面的属性是拼接成的，所以还需要一个拼接的函数,既然是拼接成的
-                     就需要获取这基本的属性，然后在拼接在一起，获取的话，就需要get的方式
-                     其中的this是当前的这个Vue实例，可以根据这个this来指定想要的属性
-                     因为this是站在Vue的这个高点上，是可以直接获取里面的数据的（按照个人的理解）
-                     然后下面的返回值去了哪里，哪就是调用这个函数的地方了，不去哪里还能去哪里
-                     本应该先从文本框中去获取数据（set），得到之后，在get到 */
-                fullName:{
-                    get(){
-                        return this.firstname + '-' +this.lastname 
-                    },
-                    set(value){
-                        /* 5.下面的是把打印在控制塔上的汉字数据用-来分割开
-                             获取数据的时候，第一个用arr[0]的方式，第二个是arr[1]的方式 */
-                        const arr= value.split('-')
-                        this.firstname = arr[0]
-                        this.lastname = arr[1]
-                    }
-                }
+                /* 4.简写的形式也是可以的
+                     原理是底层的set和get
+                     可以理解成，当去执行fullName的时候
+                     执行到里面方法的时候，this得到的是最新的数据
+                     因此，一修改就可以获取到数据，显示在页面上 */
+                     fullName(){
+                         console.log('方法被调用')
+                         return this.firstname + '-' +this.lastname
+                     }
             }
         })
     </script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+
+        <!-- 1.当v-vshow是false的时候，会隐藏文本数据
+               同时也可以去使用布尔试来得出true，
+               同时可以在这个地方写一个变量，然后把变量写在vue
+               中，动态的改变，用F12的方式可以看到代码
+            
+               注意:高频率是使用的show，不是高频率可以使用if-->
+        <h1 v-show="true">欢迎来到{{name}}</h1><br>
+
+
+        <!-- 2.v-if的方式使用，用法和上面差不多，看源码的时候
+               会吧这个标签删除,当是true的时候，可以看到-->
+        <h1 v-if="false">欢迎来到{{name}}</h1>
+
+
+        <!-- 3.n+的形式
+               下面使用的是show的形式，当去使用if
+                语法的时候，一个if和其他的else配合着去
+                使用，中间不可以打断，当第一个成立的时候，else
+                下面的数据不去执行 -->
+        <h2>当前的n值是:{{n}}</h2>
+        <button @click="n++">点我n+1</button>
+        <div v-show="n === 1">Ange</div><br>
+        <div v-show="n === 2">Geas</div><br>
+        <div v-show="n === 3">Hjsd</div><br>
+
+
+        <!-- 4.v-if和templates结合使用
+               templates只能结合着v-if来使用
+               执行结束的时候，显示在页面上，源代码
+               中template被删除 -->
+        <template v-if="n === 1">
+            <h1>ISas</h1>
+            <h1>sd</h1>
+            <h1>sdd</h1>
+        </template>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el:'#root',
+        data:{
+            name:'sias',
+            n:'0',
+        }
+    })
+</script>
+</html>

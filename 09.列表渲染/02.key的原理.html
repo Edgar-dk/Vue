@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>key的原理</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 点击事件的后面once表示只可以点击一次这个按钮 -->
+        <button @click.once="add">添加</button>
+        <ul>
+            <!-- 注意：这个里面的index是按照persons里面的数去增加的
+                       里面有几个数，在去增加数据的时候，也是增加几个
+                       index目的是为了唯一的标识li这个标签
+                       p.id表示从写好的数组数据中直接取出数据，当做这个
+                       li标签的唯一标识（id）在来一个数据的话，也是从新的
+                       数组数据中取出写好的id去对比 -->
+            <li v-for="(p,index) of persons" :key="p.id">
+                {{p.name}}-{{p.age}}
+                <input type="text">
+            </li>
+        </ul> 
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                name:'sias',
+                persons:[
+                    {id:'001',name:'张三',age:'19'},
+                    {id:'002',name:'李四',age:'20'},
+                    {id:'003',name:'王五',age:'21'},
+                ],
+            },
+            methods: {
+                    /* 1.当去执行这个方法的时候，把数组中的数据加
+                         在了persons的最前面
+                         新的数据可以增加在旧数据的前面，也可以增加在后面 */
+                    add(){
+                        const p ={id:'004',name:'老六',age:'40'}
+                        this.persons.unshift(p)
+                    }
+                },
+        })
+    </script>
+</body>
+</html>

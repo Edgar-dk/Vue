@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>当前的n值是：<span v-text="n"></span></h2>
+        <h2>放大10倍n是：<span v-big="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+        <br>
+        <input type="text" v-fbind="n">
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                n: '1',
+            },
+            directives: {
+                /* 2.big后面是一个函数这个函数是自定义的，所以需要加上括号
+                     以及大括号，这个是简写的方式，具体的方式，需要在后面
+                     写上function
+                     
+                     element是这个Span标签，也就是Dom，binding是v-big这个指令,这个指令
+                     包括了很多的数据内容，里面的n是怎么写的，以及其他的信息
+                     ，后面的value
+                     是指令后面的数据innerText是文本框*/
+                big(element, binding) {
+                    element.innerText = binding.value * 10
+                },
+                fbind:{
+                    /* 3.指令和元素成功绑定时
+                         其实第三部和第四步差不多 */
+                    bind(element, binding){
+                        element.value=binding.value
+                    },
+
+                    /* 4.指令所在元素被插入页面时
+                         这个是页面渲染结束的时候，显示在页面上
+                          */
+                    inserted(element, binding){
+                        element.focus()
+                    },
+
+                    /* 5.指令所在的模板被重新解析 */
+                    update(element, binding){
+                        element.value=binding.value
+                        element.focus()
+                    }
+
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

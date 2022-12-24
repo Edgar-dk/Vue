@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+      
+       <!-- 3.使用组件 -->
+       <school></school>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const school =Vue.extend({
+            /* 1.在去定义组建的时候，先不要去写
+                 el（id），在去使用的时候，由最终的Vm去指定
+                 服务那个地方
+                 在组件里面data的形式要写成函数的形式（规定）
+                 然后在Data里面在写对象的形式去返回数据
+                 
+                 注意：使用函数形式的话，当多个地方（A，B）使用一个地方（c）
+                 资源的时候，A使用C的数据，在A的地方对C发生改变，不会影响B里面数据的改变
+                 
+                 在写模板的时候，需要在这个位置上写结构（Html），一开始这个
+                 结构是在最上面（Div中），现在需要在这个地方写。在解析的时候
+                 按照这个位置上的模板解析，并且把产生的数据渲染到页面上
+                 
+                 其实在定义组件的时候，已经把数据以及结构都写好了，剩下的
+                 只需要去注册组建和使用组件就可以了，组件的地方也可以定义这个名字叫什么*/
+            data() {
+                return {
+                    schoolName:'Sias',
+                    address:'郑州',
+                }
+            },
+           
+        })
+        new Vue({
+            el: '#root',
+
+            /* 2.注册组件（局部注册），把school往Vue中注册好使用的时候
+                 按照最前面的那个变量取数据，后面的那个变量
+                 是从定义的Vue中取数据 */
+            components:{
+                school:school,
+            }
+        })
+    </script>
+</body>
+
+</html>

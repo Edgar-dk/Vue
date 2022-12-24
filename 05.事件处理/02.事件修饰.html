@@ -10,7 +10,8 @@
 <body>
     <div id="root">
         <h1>你好,{{name}}</h1>
-        <!-- 1.阻止默认事件，点击事件之后的参数是，不提交链接的访问 -->
+        <!-- 1.阻止默认事件，点击事件之后的参数是，不提交链接的访问
+               点击方法之后，去执行方法中的内容，不去执行前面的地址访问 -->
         <a href="http://www.baidu.com" @click.prevent="showInfo">点击去百度</a><br>
         <!-- 2.阻止冒泡
                就是地址有多个，一个是外面的，一个是里面的，所以在点击的时候，会出现响应两次的情况，为了防止
@@ -18,7 +19,9 @@
         <div id="demo" @click="showInfo">
             <button @click.stop="showInfo">点击事件</button>
         </div>
-        <!-- 3.事件只触发一次 -->
+        <!-- 3.事件只触发一次
+               在去点击第一次的时候，执行，在点击第二次的时候
+               不去执行 -->
         <button @click.once="showInfo">事件只触发一次</button>
     </div>
     <script type="text/javascript" >

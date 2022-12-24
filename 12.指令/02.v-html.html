@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>地址:{{name}}</h1>
+
+
+        <!-- 1.支持结构的解析，所谓的结构，
+               在字符串中写的文字，如果有标签的形式，就是
+               结构的方式， -->
+        <div v-html="name"></div>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+               name:'<h2>Sias</h2>',
+            },
+        })
+    </script>
+</body>
+</html>

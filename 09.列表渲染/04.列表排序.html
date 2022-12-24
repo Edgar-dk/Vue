@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>列表排序</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h2>人员列表</h2>
+            
+			<input type="text" placeholder="请输入名字" v-model="keyWord">
+			<button @click="sortType = 2">升序</button>
+			<button @click="sortType = 1">降序</button>
+			<button @click="sortType = 0">原顺序</button>
+			<ul>
+				<li v-for="(p,index) of filPerons" :key="p.id">
+					{{p.name}}-{{p.age}}-{{p.sex}}
+					<input type="text">
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			Vue.config.productionTip = false
+			
+		
+			
+			//1.用computed实现
+			new Vue({
+				el:'#root',
+				data:{
+					keyWord:'',
+					sortType:'',//0,表示原顺序，1降序，2升序
+					persons:[
+						{id:'001',name:'马冬梅',age:32,sex:'女'},
+						{id:'002',name:'周冬雨',age:45,sex:'女'},
+						{id:'003',name:'周杰伦',age:2,sex:'男'},
+						{id:'004',name:'温兆伦',age:25,sex:'男'}
+					]
+				},
+				computed:{
+
+                    /* 3.分析：-1前面的放回值，是把数据返回给了filter，上面的哪一个
+                            放回值把数据返回给了filPersons，计算属性和监视属性都可以做的
+                            去使用计算属性， */
+					filPerons(){
+						const arr= this.persons.filter((p)=>{
+							return p.name.indexOf(this.keyWord) !== -1
+						})
+
+						/* 4.本身，if的判断语句中，true的话，就往下面执行
+						     0之外的为true，0的话，为false，就进不去
+							 p1,p2是persons中的两个前后数据，sort也是排序的
+							 意思，虽然使用了一个if去判断一个数据可以进入
+							 这进入的数据是两个，这两数据还需要去判断，在去
+							 判断的话，可以使用三原的方式判断， */
+						if(this.sortType){
+							arr.sort((p1,p2)=>{
+								return this.sortType === 1? p2.age-p1.age : p1.age-p2.age
+							})
+						}
+						return arr
+					}
+				}
+			})  
+		</script>
+    </body>
+</html>

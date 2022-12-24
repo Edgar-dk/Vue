@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+    <style>
+        .basic{
+            width: 120px;
+            height: 120px;
+            border-style: solid;
+            background-color: aqua;
+        }
+        .happy{
+            border-style: red;
+            background-color: blue;
+        }
+        .mood{
+            /* border-style: blue; */
+            background-color: bisque;
+        }
+        .sad{
+            background-color: blueviolet;
+        }
+        .nomal{
+            background-color: black;
+        }
+        .sias1{
+            background-color: brown;
+        }
+        .sias2{
+            background-color: blueviolet;
+        }
+        .sias3{
+            background-color: beige;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 1.绑定字符串，：表示从vue中取出来
+               在去点击的时候，就会改变颜色， -->
+       <div class="basic" :class="a" @click="changeMood">你好,{{name}}</div><br>
+
+       <!-- 2.灵活的方式改变背景色,数组的形式去绑定，个数不确定，名字也不确定 
+              用字符串引起来的是一个值，运行的时候去找这个值
+              在去运行的时候，把这三个属性都用上，一样的属性，只使用一种-->
+       <div class="basic" :class="classarr" >你好,{{name}}</div>
+
+
+        <!-- 3,对象的形式去写，个数确定，名字确定，获取的时候，是动态的获取 -->
+       <div class="basic" :class="classObj" >你好,{{name}}</div>
+
+       <!-- 4.style的方式去更改
+              styleObj:{
+                fontSize:'40px',
+                color:'red',
+            }这个是对象的方式，对象里面可以写任何类型的数据 -->
+       <div class="basic" :style="styleObj" >你好,{{name}}</div>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#root',
+        data: {
+           name:'sias',
+           a:'happy',
+           classarr:['sias1','sias2','sias3'],
+           /* 3.在数据里面可以写单个的，同时也可以写
+                对象的形式（数据可以是多个），false
+                表示不使用，true的时候，才去使用 */
+            classObj:{
+                sias1:false,
+                sias2:false,
+            },
+
+            /* 4.这种样式对象，
+                 要么是CSS中存在的，可以直接写
+                 要么是上面定义好的，可以拿过来直接使用 */
+            styleObj:{
+                fontSize:'40px',
+                color:'red',
+            }
+        },
+        methods: {
+            changeMood(){
+                /* 2.定义数组的时候，最重要是在最后写上数据
+                     Math.random()*3表示随机的取出0，1，2三个数
+                     只是这三个数，有小数，Math.floor去掉小数部分*/
+                const arr =['mood','sad','nomal']
+                const index=Math.floor(Math.random()*3)
+                this.a=arr [index]
+            }
+        },
+                
+    })
+</script>
+
+</html>

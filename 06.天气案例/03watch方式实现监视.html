@@ -38,27 +38,29 @@
             el:'#root',
             data:{
                 firstname:'张',
-                lastname:'三'
+                lastname:'三',
+                fullName:'张-三'
             },
-            
-            computed:{
-                /* 4.里面的属性是拼接成的，所以还需要一个拼接的函数,既然是拼接成的
-                     就需要获取这基本的属性，然后在拼接在一起，获取的话，就需要get的方式
-                     其中的this是当前的这个Vue实例，可以根据这个this来指定想要的属性
-                     因为this是站在Vue的这个高点上，是可以直接获取里面的数据的（按照个人的理解）
-                     然后下面的返回值去了哪里，哪就是调用这个函数的地方了，不去哪里还能去哪里
-                     本应该先从文本框中去获取数据（set），得到之后，在get到 */
-                fullName:{
-                    get(){
-                        return this.firstname + '-' +this.lastname 
-                    },
-                    set(value){
-                        /* 5.下面的是把打印在控制塔上的汉字数据用-来分割开
-                             获取数据的时候，第一个用arr[0]的方式，第二个是arr[1]的方式 */
-                        const arr= value.split('-')
-                        this.firstname = arr[0]
-                        this.lastname = arr[1]
-                    }
+
+            /* 4.分析：当一个括号中的数据发生改变的时候
+                       这个监视器就气到了作用，哪一个文本框
+                       发生的改变就去执行哪一个函数，把新的数据传递到函数中，
+                       把旧的数据改变掉，然后另外一个地方获取这个数据也会发生改变
+                       this.lastName是当前的数据，因为当前的数据是最新的，可以使用
+                       newVlaue只是一个名字，是获取传递过来数据的变量，这个变量的
+                       名字可以取任何值
+                       
+                       注意：在监视中，写的都是每一个函数的片段，这个时候
+                       就可以去操作具体的细节，监视，可以在某一个函数中停顿几秒
+                       计算属性不可以，watch可以使用异步任务*/
+            watch:{
+                firstname(newValue){
+                    setTimeout(()=>{
+                        this.fullName=newValue+'-'+this.lastname
+                    },1000);
+                },
+                lastname(newValue){
+                    this.fullName= this.firstname+'-'+newValue
                 }
             }
         })

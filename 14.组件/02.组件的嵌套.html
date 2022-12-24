@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+        <!-- 3.使用组件，
+               在这个一步，可以写框架，也可以在Vue中写templates
+               解析的时候，直接渲染到页面上 -->
+        <app></app>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const student = Vue.extend({
+            name: 'student',
+            template: '<div><h2>姓名：{{studentname}}</h2><h2>地址：{{studentaddress}}</h2></div>',
+            data() {
+                return {
+                    studentname: '张三',
+                    studentaddress: '北京',
+                }
+            },
+        })
+
+        /* 2，在一个组件中，是可以自己定义数据的，定义好数据
+              需要使用里面的数据，这个数据的使用过程也有一定的方法的
+              数据本身是在这个组件中，因此使用的话，也是在这个组件中
+              使用的，这个使用的过程就是template，里面写渲染的结构
+              
+              上面的一步是定义，定义之后，就要去总的组件中，注册这个小的组件
+              然后注册好之后，数据都在Vue中，剩下的过程需要渲染页面，这个渲染的过程也
+              有一定的方法，可以直接在Vue中渲染，也可以在Vue指定的Div渲染
+              
+              小的组件，定义数据，然后在上面写template获取数据，这个是数据方面的
+              在Vue中，也有这样类似的过程，定义数据相当于注册组件，Vue中的template相当于获取数据*/
+        const school = Vue.extend({
+            name: 'school',
+            template: '<div><h2>学校：{{schoolName}}</h2><h2>地址：{{address}}</h2><student></student></div>',
+            data() {
+                return {
+                    schoolName: 'Sias',
+                    address: '州',
+                }
+            },
+            components: {
+                student
+            }
+        })
+        const hello = Vue.extend({
+            template: '<h1>欢迎来到鹿邑{{msg}}</h1>',
+            data() {
+                return {
+                    msg: 'Sias'
+                }
+            }
+        })
+
+        /* 2,定义一个管理组件的application
+             这个所谓的管理，就是把其他的组件放在这个
+             大的组建里面使用，所以说，这一步相当于是
+             把其他的小组件注册到大组件中
+             
+             注意：把一个组件成为另外一个组件的小弟的时候，需要把小弟组件
+             写在大哥组件里面并且，需要在大哥组件的template中写上小弟组件
+             
+             使用完之后，最后的就是渲染组件了，只需要把最顶层的组件渲染就可以了
+             这个渲染的过程，可以在Vue模板中，同时也可以在div框架中，在Vue模板中
+             要用到template，这个是模板的意思，最终只显示里面的内容，这个template不显示
+             在代码中*/
+        const app =Vue.extend({
+            template:'<div><hello></hello><school></school></div>',
+            components:{
+                hello,
+                school
+            }
+        })
+        const vm=new Vue({
+            el: '#root',
+            components: {
+               app
+            }
+        })
+    </script>
+</body>
+
+</html>

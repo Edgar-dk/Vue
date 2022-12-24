@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>列表过滤</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			<h2>人员列表</h2>
+            <!-- 1.placeholder表示在没有输入信息的时候
+               可以浅显的看到文本框中的文字，当输入信息的时候
+               文字消失，只有自己输入的信息 -->
+			<input type="text" placeholder="请输入名字" v-model="keyWord">
+			<ul>
+				<li v-for="(p,index) of filPerons" :key="index">
+					{{p.name}}-{{p.age}}-{{p.sex}}
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			Vue.config.productionTip = false
+			
+			//1.用watch实现
+			//#region 
+/* 			new Vue({
+				el:'#root',
+				data:{
+					keyWord:'',
+					persons:[
+						{id:'001',name:'马冬梅',age:19,sex:'女'},
+						{id:'002',name:'周冬雨',age:20,sex:'女'},
+						{id:'003',name:'周杰伦',age:21,sex:'男'},
+						{id:'004',name:'温兆伦',age:22,sex:'男'}
+					],
+					filPerons:[]
+				}, */
+
+               /* 2.自己定义的属性，在去设置自己定义好的属性的时候
+                    可以是函数的形式变化数据，同时也可以是对象的形式去变化数据
+
+                    分析：val是输入的数据，filter是从persons中过滤出来数据
+                        p是persons中的一个，indexOf是字符串，传递字符在去执行
+                        这个方法的时候，根据关键字检索出来，然后在赋值给persons
+                        根据关键字去检索出来，检索出来的数据还是数组的形式，因此
+                        还需要把数据赋值给数组，这个数组可以是以前的数据模板，同时
+                        也可以赋值给一个新定义好的数组
+                        
+                        immediate:true表示在去初始化的时候，去执行一下，这个监视属性
+                        重要的是handler，当keyword发生变化的时候，去执行handler
+                        
+                        初始化执行，传递的参数是一个空的字符串，表示搜索全部的数据展现在
+                        页面上,把搜索出来的数据给新的数组*/
+/* 				watch:{
+					keyWord:{
+						immediate:true,
+						handler(val){
+							this.filPerons = this.persons.filter((p)=>{
+								return p.name.indexOf(val) !== -1
+							})
+						}
+					}
+				} 
+			}) */
+
+			//#endregion
+			
+			//2.用computed实现
+			new Vue({
+				el:'#root',
+				data:{
+					keyWord:'',
+					persons:[
+						{id:'001',name:'马冬梅',age:19,sex:'女'},
+						{id:'002',name:'周冬雨',age:20,sex:'女'},
+						{id:'003',name:'周杰伦',age:21,sex:'男'},
+						{id:'004',name:'温兆伦',age:22,sex:'男'}
+					]
+				},
+				computed:{
+
+                    /* 3.分析：-1前面的放回值，是把数据返回给了filter，上面的哪一个
+                            放回值把数据返回给了filPersons，计算属性和监视属性都可以做的
+                            去使用计算属性， */
+					filPerons(){
+						return this.persons.filter((p)=>{
+							return p.name.indexOf(this.keyWord) !== -1
+						})
+					}
+				}
+			})  
+		</script>
+    </body>
+</html>

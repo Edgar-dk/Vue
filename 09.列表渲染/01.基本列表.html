@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../JS/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+
+
+         <!-- 1.遍历数据的时候，persons是一个数据池
+                   p，表示可以从persons可以取出一个数据
+                   persons里面有几个数据，p就表示有几个
+                   这个几个数据就会展示在下面
+                   这种方式，可以理解成是一个遍历的形式取数据
+                
+                   key表示，在去遍历数据的时候，遍历到第一个的时候
+                   给第一个li取一个id，这个id是001，到第二个的时候，
+                   在去从里面取出数据，
+                   -->
+        <ul>
+            <li v-for="p in persons" :key="p.id">
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+        <!-- 2.遍历对象
+               把value写在前面，取数据的时候
+               按照k-y的方式 -->
+        <ul>
+            <li v-for="(value,k) of car" :key="k">
+               {{k}}-{{value}}
+            </li>
+        </ul>
+  
+        <!-- 3.遍历字符串
+               char从一个字符串中截取出来第一个
+               index是从0开始，在去遍历数据的时候，是
+               从str开始的 -->
+        <ul>
+            <li v-for="(char,index) of str" :key="index">
+               {{char}}-{{index}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el:'#root',
+        data:{
+            name:'sias',
+            persons:[
+                {id:'001',name:'张三',age:'19'},
+                {id:'002',name:'李四',age:'20'},
+                {id:'003',name:'王五',age:'21'},
+            ],
+            car:{
+                name:'奔驰',
+                price:'2332',
+                color:'红色',
+            },
+            str:'Hello',
+        },
+        
+    })
+</script>
+</html>
